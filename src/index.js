@@ -56,7 +56,7 @@ router.get('/check-limit/:customerId/:featureId', async (req, res) => {
         'Content-Type': 'application/json',
         cacheOverride: new CacheOverride('override', {
           ttl: 36000000,
-          surrogateKey: `check-feature ${tenantKey} ${customerId} ${featureId}`,
+          surrogateKey: `check-feature-limit ${tenantKey} ${customerId} ${featureId}`,
         }),
       },
     }
