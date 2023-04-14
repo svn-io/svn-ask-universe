@@ -1,12 +1,18 @@
 # This file describes a Fastly Compute@Edge package. To learn more visit:
 # https://developer.fastly.com/reference/fastly-toml/
 
-authors = ["<oss@fastly.com>"]
-description = "A basic Expressly starter kit that demonstrates simple GET, POST, and middleware functionality."
+authors = ["svn.io"]
+description = "Ask the universe."
 language = "javascript"
 manifest_version = 2
-name = "Default starter kit for Expressly"
+name = "Ask the universe."
 service_id = "ltUTz8OJe4NVSKkoy1gNE2"
 
 [scripts]
   build = "npm run build"
+
+[local_server]
+  [local_server.backends]
+    [local_server.backends.vercel]
+      url = "https://api.svn.sh"
+      override_host = "api.svn.sh"
