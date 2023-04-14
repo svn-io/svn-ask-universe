@@ -26,10 +26,6 @@ router.get('/check/:customerId/:featureId', async (req, res) => {
         'x-tenant-key': tenantKey,
         'Content-Type': 'application/json',
       },
-      // cacheOverride: new CacheOverride({
-      // 	ttl: 36000000,
-      // 	surrogateKey: `check-feature ${tenantKey} ${customerId} ${featureId}`,
-      // }),
       cacheOverride: new CacheOverride('override', {
         ttl: 36000000,
         surrogateKey: `check-feature ${tenantKey} ${customerId} ${featureId}`,
@@ -39,14 +35,6 @@ router.get('/check/:customerId/:featureId', async (req, res) => {
 
   // set - do not store in browser
   res.headers.set('Cache-Control', 'private, no-store')
-  // // set - cache in fastly - year
-  // res.headers.set("Surrogate-Control", "max-age=36000000")
-
-  // surrogote keys
-  // res.headers.set(
-  // 	"Surrogate-Key",
-  // 	`check-feature ${tenantKey} ${customerId} ${featureId}`
-  // )
 
   res.send(response)
 })
@@ -66,20 +54,16 @@ router.get('/check-limit/:customerId/:featureId', async (req, res) => {
       headers: {
         'x-tenant-key': tenantKey,
         'Content-Type': 'application/json',
+        cacheOverride: new CacheOverride('override', {
+          ttl: 36000000,
+          surrogateKey: `check-feature ${tenantKey} ${customerId} ${featureId}`,
+        }),
       },
     }
   )
 
   // set - do not store in browser
-  res.headers.set('Cache-Control', 'private, no-store,  max-age=0')
-  // set - cache in fastly - year
-  res.headers.set('Surrogate-Control', 'max-age=36000000')
-
-  // surrogote keys
-  res.headers.set(
-    'Surrogate-Key',
-    `check-feature ${tenantKey} ${customerId} ${featureId}`
-  )
+  res.headers.set('Cache-Control', 'private, no-store')
 
   res.send(response)
 })
