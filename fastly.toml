@@ -16,3 +16,6 @@ service_id = "ltUTz8OJe4NVSKkoy1gNE2"
     [local_server.backends.vercel]
       url = "https://api.svn.sh"
       override_host = "api.svn.sh"
+    [local_server.backends.hookdeck]
+      url = "https://events.hookdeck.com"
+      override_host = "events.hookdeck.com"
